@@ -32,13 +32,13 @@ public class TestYear implements Serializable {
     @Column(nullable = false)
     private String alternativaCorreta;
 
-    @Column
+    @Column(length = 3000)
     private String contexto;
 
-    @Column
+    @Column(length = 3000)
     private String introducao;
 
     @Convert(converter = AlternativaConverter.class)
-    @Column(name = "alternativa")
+    @Column(name = "alternativa", length = 3000)
     private List<Alternativa> alternativa;
 }
