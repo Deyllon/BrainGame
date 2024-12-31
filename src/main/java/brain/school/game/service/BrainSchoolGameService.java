@@ -54,6 +54,10 @@ public class BrainSchoolGameService {
         return  testYear.findAll();
     }
 
+    public TestYear getOne(String disciplina) {
+        return testYear.findByDisciplina(disciplina);
+    }
+
     @PostConstruct
     private List<TestYear> populate() {
         List<TestYear> savedTests = new ArrayList<>();

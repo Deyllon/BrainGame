@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/test")
 public class TestYearController {
 
+
     @Autowired
     private BrainSchoolGameService schoolGameService;
 
@@ -28,5 +29,10 @@ public class TestYearController {
     @GetMapping
     public ResponseEntity<List<TestYear>> getTest(){
         return new ResponseEntity<>(schoolGameService.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{disciplina}")
+    public ResponseEntity<TestYear> getOneTest(@PathVariable String disciplina) {
+        return new ResponseEntity<>(schoolGameService.getOne(disciplina))
     }
 }
