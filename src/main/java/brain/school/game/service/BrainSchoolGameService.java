@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -55,7 +56,23 @@ public class BrainSchoolGameService {
     }
 
     public TestYear getOne(String disciplina) {
-        return testYear.findByDisciplina(disciplina);
+        List<TestYear> questions = testYear.findByDisciplina(disciplina);
+
+        int size = questions.size();
+        Random random = new Random();
+        int randomIndex = random.nextInt(0, size);
+
+        return  questions.get(randomIndex);
+    }
+
+    public TestYear getYear(String ano) {
+        List<TestYear> questions = testYear.findByAno(Integer.parseInt( ano));
+
+        int size = questions.size();
+        Random random = new Random();
+        int randomIndex = random.nextInt(0, size);
+
+        return  questions.get(randomIndex);
     }
 
     @PostConstruct
