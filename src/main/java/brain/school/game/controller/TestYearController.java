@@ -31,6 +31,14 @@ public class TestYearController {
         return new ResponseEntity<>(schoolGameService.get(), HttpStatus.OK);
     }
 
+    @GetMapping("/year/discipline")
+    public ResponseEntity<TestYear> getByYearAndDiscipline(
+            @RequestParam("year") String year ,
+            @RequestParam("discipline") String discipline
+    ){
+        return new ResponseEntity<>(schoolGameService.getByYearAndDiscipline(year, discipline), HttpStatus.OK);
+    }
+
     @GetMapping("/ano/{ano}")
     public ResponseEntity<TestYear> getAno(@PathVariable("ano") String ano) {
         return new ResponseEntity<>(schoolGameService.getYear(ano), HttpStatus.OK);

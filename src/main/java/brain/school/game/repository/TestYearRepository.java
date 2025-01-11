@@ -7,4 +7,5 @@ import java.util.List;
 public interface TestYearRepository extends JpaRepository<TestYear, Long> {
     List<TestYear> findByDisciplina(String disciplina);
     List<TestYear> findByAno(int ano);
+    List<TestYear> findByDisciplinaAndAno(String disciplina, int ano);
 }

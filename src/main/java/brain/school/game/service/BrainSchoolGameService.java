@@ -65,6 +65,16 @@ public class BrainSchoolGameService {
         return  questions.get(randomIndex);
     }
 
+    public TestYear getByYearAndDiscipline(String year, String disciplina) {
+        List<TestYear> questions = testYear.findByDisciplinaAndAno(disciplina, Integer.parseInt(year));
+
+        int size = questions.size();
+        Random random = new Random();
+        int randomIndex = random.nextInt(0, size);
+
+        return  questions.get(randomIndex);
+    }
+
     public TestYear getYear(String ano) {
         List<TestYear> questions = testYear.findByAno(Integer.parseInt( ano));
 
@@ -104,10 +114,8 @@ public class BrainSchoolGameService {
                 for (File questionFolder : Objects.requireNonNull(questionsFolder.listFiles())) {
                     for (File jsonFile : Objects.requireNonNull(questionFolder.listFiles((dir, name) -> name.endsWith(".json")))) {
                         try (FileInputStream fileInputStream = new FileInputStream(jsonFile)) {
-                            // Parse the JSON content
                             JsonNode rootNode = objectMapper.readTree(fileInputStream);
 
-                            // Create alternatives from JSON
                             List<Alternativa> alternativas = StreamSupport.stream(rootNode.get("alternatives").spliterator(), false)
                                     .map(a -> Alternativa.builder()
                                             .letra(a.get("letter").asText())
@@ -115,7 +123,6 @@ public class BrainSchoolGameService {
                                             .build())
                                     .toList();
 
-                            // Build the TestYear object
                             TestYear test = TestYear.builder()
                                     .ano(rootNode.get("year").asInt())
                                     .disciplina(rootNode.get("discipline").asText())
