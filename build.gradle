@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.postgresql:postgresql:42.6.0'
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation('com.auth0:java-jwt:4.4.0')
 	testCompileOnly 'org.projectlombok:lombok:1.18.36'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'

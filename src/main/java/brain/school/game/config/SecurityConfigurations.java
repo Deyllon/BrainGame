@@ -26,8 +26,11 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/ws").permitAll()
+                        .requestMatchers("/ws/game").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/ranking/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

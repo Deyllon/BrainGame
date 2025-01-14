@@ -62,7 +62,12 @@ public class BrainSchoolGameService {
         Random random = new Random();
         int randomIndex = random.nextInt(0, size);
 
-        return  questions.get(randomIndex);
+        TestYear selectedQuestion = questions.get(randomIndex);
+
+        String processedText = processText(selectedQuestion.getContexto());
+        selectedQuestion.setContexto(processedText);
+
+        return selectedQuestion;
     }
 
     public TestYear getByYearAndDiscipline(String year, String disciplina) {
@@ -72,7 +77,12 @@ public class BrainSchoolGameService {
         Random random = new Random();
         int randomIndex = random.nextInt(0, size);
 
-        return  questions.get(randomIndex);
+        TestYear selectedQuestion = questions.get(randomIndex);
+
+        String processedText = processText(selectedQuestion.getContexto());
+        selectedQuestion.setContexto(processedText);
+
+        return selectedQuestion;
     }
 
     public TestYear getYear(String ano) {
@@ -82,7 +92,12 @@ public class BrainSchoolGameService {
         Random random = new Random();
         int randomIndex = random.nextInt(0, size);
 
-        return  questions.get(randomIndex);
+        TestYear selectedQuestion = questions.get(randomIndex);
+
+        String processedText = processText(selectedQuestion.getContexto());
+        selectedQuestion.setContexto(processedText);
+
+        return selectedQuestion;
     }
 
     @PostConstruct
@@ -146,6 +161,23 @@ public class BrainSchoolGameService {
         }
 
         return savedTests;
+    }
+
+    private String processText(String text) {
+        if (text == null) {
+            return null;
+        }
+
+        // Transformar **texto** em <b>texto</b>
+        text = text.replaceAll("\\*\\*(.*?)\\*\\*", "<b>$1</b>");
+
+        // Transformar ![](url) em <img src="url" />
+        text = text.replaceAll("!\\[\\]\\((.*?)\\)", "<img src=\"$1\" />");
+
+        // Remover \[...\] e manter apenas o texto dentro
+        text = text.replaceAll("\\\\?\\[(.*?)\\\\?\\]", "$1");
+
+        return text;
     }
 
 }
